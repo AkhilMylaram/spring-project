@@ -1,0 +1,29 @@
+
+pipeline{
+	agent {
+        label 'gold'
+   	 }
+	tools{
+		maven "MAVEN"
+		jdk "oracle11"
+	}
+	stages{
+		stage("clone the code "){
+			steps{
+				git branch : "main" , url : "https://github.com/hkhcoder/vprofile-project"
+			}
+		}
+		stage("Build"){
+			steps{
+				sh 'mvn install -DskipTests'
+			}
+			post{
+				success {
+					echo "Archiving the artifact"
+					archiveArtifacts artifacts:'**/target/*.war'
+				}
+			}
+		}
+
+	}
+}

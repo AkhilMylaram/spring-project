@@ -1,0 +1,14 @@
+pipeline{
+
+	agent{
+		label 'SilverNode'
+	}
+	stages{
+		stage("Running the shell commands"){
+			steps{
+				sh 'echo "successfully executed pipeline from silver-node "'
+			}
+			
+		}
+	}
+}
