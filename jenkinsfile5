@@ -1,0 +1,27 @@
+pipeline {
+	agent any
+	tools {
+		jdk 'Oracle_jdk'
+        maven 'maven3'
+	}
+	stages{
+		stage('Fetch code from Git'){
+			steps{
+				git branch:"main" , url:"https://github.com/AkhilMylaram/spring-project.git"
+			}
+			
+		}
+		stage('Build'){
+			steps{
+				sh 'mvn install -DskipTests'
+			}
+			post{
+				success {
+					echo " ardchiving the artifacts"
+					archiveArtifacts artifacts: '**/target/*.war'
+				}
+			}
+		}
+		
+	}
+}
