@@ -1,0 +1,4 @@
+image:
+  repository: akhilmylaram/spring-project
+  pullPolicy: IfNotPresent
+  tag: "11"
