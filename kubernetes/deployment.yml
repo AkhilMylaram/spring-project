@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring
-          image: akhilmylaram/spring-project:11
+          image: akhilmylaram/app:V3
           ports:
             - name: spring-port
               containerPort: 8080
