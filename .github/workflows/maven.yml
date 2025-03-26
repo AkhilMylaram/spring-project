@@ -20,7 +20,7 @@ jobs:
     - name: Create Artifact Directory
       run: |
         mkdir -p artifact  # Create the artifact directory
-        cp target/*.jar artifact/  # Copy the .jar file (or use the correct extension)
+        cp target/*.war artifact/  # Copy the .jar file (or use the correct extension)
     - name: Rename Artifact with Job Number
       run: |
         JOB_NUMBER=${{ github.run_number }}
