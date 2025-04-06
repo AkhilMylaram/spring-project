@@ -28,11 +28,10 @@ jobs:
     - name: Rename Artifact with Job Number
       run: |
         JOB_NUMBER=${{ github.run_number }}
-        # Renaming the artifact by prepending the job number to the original filename
         mv artifact/*.war artifact/${JOB_NUMBER}_$(basename artifact/*.war)
 
     - name: Upload Artifact to GitHub Actions
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2  # Use v2 instead of v3
       with:
         name: my-artifact
         path: artifact/*  # Upload everything in the artifact directory
