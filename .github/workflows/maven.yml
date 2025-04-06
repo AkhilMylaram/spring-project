@@ -31,7 +31,7 @@ jobs:
         mv artifact/*.war artifact/${JOB_NUMBER}_$(basename artifact/*.war)
 
     - name: Upload Artifact to GitHub Actions
-      uses: actions/upload-artifact@v2  # Use v2 instead of v3
+      uses: actions/upload-artifact@latest  # Use latest or v2
       with:
         name: my-artifact
         path: artifact/*  # Upload everything in the artifact directory
