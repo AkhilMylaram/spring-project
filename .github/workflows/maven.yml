@@ -9,27 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
     - name: Create Artifact
-      run: mvn install  # This generates the target directory and the artifact (e.g., .jar)
+      run: mvn install  # This generates the target directory and the artifact (e.g., .jar or .war)
+
     - name: Create Artifact Directory
       run: |
         mkdir -p artifact  # Create the artifact directory
-        cp target/*.war artifact/  # Copy the .jar file (or use the correct extension)
+        cp target/*.war artifact/  # Copy the .war file (or use the correct extension)
+
     - name: Rename Artifact with Job Number
       run: |
         JOB_NUMBER=${{ github.run_number }}
-        mv artifact/* artifact/${JOB_NUMBER}_$(basename artifact/*)  # Rename the artifact with the job number
+        # Renaming the artifact by prepending the job number to the original filename
+        mv artifact/*.war artifact/${JOB_NUMBER}_$(basename artifact/*.war)
 
-    - name: upload the artifact to repo
+    - name: Upload Artifact to GitHub Actions
       uses: actions/upload-artifact@v3
-      with: 
+      with:
         name: my-artifact
-        path: artifact/* 
-
-  
+        path: artifact/*  # Upload everything in the artifact directory
