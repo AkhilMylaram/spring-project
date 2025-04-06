@@ -26,6 +26,10 @@ jobs:
         JOB_NUMBER=${{ github.run_number }}
         mv artifact/* artifact/${JOB_NUMBER}_$(basename artifact/*)  # Rename the artifact with the job number
 
-
+    - name: upload the artifact to repo
+      uses: actions/upload-artifact@v3
+      with: 
+        name: my-artifact
+        path: artifact/* 
 
   
